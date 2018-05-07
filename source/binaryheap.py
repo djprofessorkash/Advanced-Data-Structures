@@ -9,8 +9,7 @@ class BinaryMinHeap(object):
 
     def __init__(self, items=None):
         """ Initializes heap and inserts given items, if any. """
-        # Initializes empty list to store items
-        self.items = list()
+        self.items = list()                 # Initializes empty list to store items
         if items:
             for item in items:
                 self.insert(item)
@@ -21,8 +20,7 @@ class BinaryMinHeap(object):
 
     def is_empty(self):
         """ Returns True if heap is empty, otherwise returns False. """
-        # Checks if heap is empty based on how many items are in list
-        if len(self.items) == 0:
+        if len(self.items) == 0:            # Checks if heap is empty based on how many items are in list
             return True
         return False
 
@@ -31,46 +29,45 @@ class BinaryMinHeap(object):
         return len(self.items)
 
     def insert(self, item):
-        """ Insert the given item into this heap.\n
-        TODO: Best case running time: ??? under what conditions?\t
-        TODO: Worst case running time: ??? under what conditions?"""
-        # Insert the item at the end and bubble up to the root
-        self.items.append(item)
+        """ Inserts given item into heap.\n
+        TODO: RUNTIME, BEST CASE:   O(?) -> ?\t
+        TODO: RUNTIME, WORST CASE:  O(?) -> ? """
+        self.items.append(item)             # Inserts item at end and bubbles up to root
         if self.size() > 1:
             self._bubble_up(self._last_index())
 
     def get_min(self):
-        """Return the minimum item at the root of this heap.
-        Best and worst case running time: O(1) because min item is the root."""
+        """ Returns minimum item at root of heap.\n
+        RUNTIME: O(1) -> Min item is at root. """
         if self.size() == 0:
-            raise ValueError('Heap is empty and has no minimum item')
+            raise ValueError("Heap is empty and has no minimum item.")
         assert self.size() > 0
         return self.items[0]
 
     def delete_min(self):
-        """Remove and return the minimum item at the root of this heap.
-        TODO: Best case running time: ??? under what conditions?
-        TODO: Worst case running time: ??? under what conditions?"""
+        """ Removes and returns minimum item at root of heap.\n
+        TODO: RUNTIME, BEST CASE:   O(?) -> ?\t
+        TODO: RUNTIME, WORST CASE:  O(?) -> ? """
         if self.size() == 0:
-            raise ValueError('Heap is empty and has no minimum item')
+            raise ValueError("Heap is empty and has no minimum item.")
         elif self.size() == 1:
-            # Remove and return the only item
-            return self.items.pop()
+            return self.items.pop()         # Removes and returns only item
+
         assert self.size() > 1
         min_item = self.items[0]
-        # Move the last item to the root and bubble down to the leaves
-        last_item = self.items.pop()
+        last_item = self.items.pop()        # Moves last item to root and bubbles down to leaves
         self.items[0] = last_item
+
         if self.size() > 1:
             self._bubble_down(0)
         return min_item
 
     def replace_min(self, item):
-        """Remove and return the minimum item at the root of this heap,
-        and insert the given item into this heap.
-        This method is more efficient than calling delete_min and then insert.
-        TODO: Best case running time: ??? under what conditions?
-        TODO: Worst case running time: ??? under what conditions?"""
+        """ Removes and returns minimum item at root of this heap,
+        and inserts given item into heap.\n
+        This method is more efficient than calling delete_min and then inserting.\n
+        TODO: RUNTIME, BEST CASE:   O(?) -> ?\t
+        TODO: RUNTIME, WORST CASE:  O(?) -> ? """
         if self.size() == 0:
             raise ValueError('Heap is empty and has no minimum item')
         assert self.size() > 0
