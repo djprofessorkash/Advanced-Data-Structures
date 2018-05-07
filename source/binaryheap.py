@@ -21,8 +21,8 @@ class BinaryMinHeap(object):
 
     def is_empty(self):
         """ Returns True if heap is empty, otherwise returns False. """
-        # TODO: Check if empty based on how many items are in the list
-        if self.items == 0:
+        # Checks if heap is empty based on how many items are in list
+        if len(self.items) == 0:
             return True
         return False
 
@@ -31,8 +31,8 @@ class BinaryMinHeap(object):
         return len(self.items)
 
     def insert(self, item):
-        """Insert the given item into this heap.
-        TODO: Best case running time: ??? under what conditions?
+        """ Insert the given item into this heap.\n
+        TODO: Best case running time: ??? under what conditions?\t
         TODO: Worst case running time: ??? under what conditions?"""
         # Insert the item at the end and bubble up to the root
         self.items.append(item)
