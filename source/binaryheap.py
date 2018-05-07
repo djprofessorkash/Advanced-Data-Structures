@@ -2,30 +2,32 @@
 
 
 class BinaryMinHeap(object):
-    """BinaryMinHeap: a partially ordered collection with efficient methods to
-    insert new items in partial order and to access and remove its minimum item.
+    """ BinaryMinHeap: a partially ordered collection with efficient methods to
+    insert new items in partial order and to access and remove its minimum item.\n
     Items are stored in a dynamic array that implicitly represents a complete
-    binary tree with root node at index 0 and last leaf node at index n-1."""
+    binary tree with root node at index 0 and last leaf node at index n-1. """
 
     def __init__(self, items=None):
-        """Initialize this heap and insert the given items, if any."""
-        # Initialize an empty list to store the items
-        self.items = []
+        """ Initializes heap and inserts given items, if any. """
+        # Initializes empty list to store items
+        self.items = list()
         if items:
             for item in items:
                 self.insert(item)
 
     def __repr__(self):
-        """Return a string representation of this heap."""
-        return 'BinaryMinHeap({})'.format(self.items)
+        """ Returns string representation of heap. """
+        return "BinaryMinHeap({})".format(self.items)
 
     def is_empty(self):
-        """Return True if this heap is empty, or False otherwise."""
+        """ Returns True if heap is empty, otherwise returns False. """
         # TODO: Check if empty based on how many items are in the list
-        # ...
+        if self.items == 0:
+            return True
+        return False
 
     def size(self):
-        """Return the number of items in this heap."""
+        """ Returns number of items in heap. """
         return len(self.items)
 
     def insert(self, item):
