@@ -9,7 +9,7 @@ class BinaryMinHeap(object):
 
     def __init__(self, items=None):
         """ Initializes heap and inserts given items, if any. """
-        self.items = list()                 # Initializes empty list to store items
+        self.items = list()                         # Initializes empty list to store items
         if items:
             for item in items:
                 self.insert(item)
@@ -20,7 +20,7 @@ class BinaryMinHeap(object):
 
     def is_empty(self):
         """ Returns True if heap is empty, otherwise returns False. """
-        if len(self.items) == 0:            # Checks if heap is empty based on how many items are in list
+        if len(self.items) == 0:                    # Checks if heap is empty based on how many items are in list
             return True
         return False
 
@@ -32,7 +32,7 @@ class BinaryMinHeap(object):
         """ Inserts given item into heap.\n
         TODO: RUNTIME, BEST CASE:   O(?) -> ?\t
         TODO: RUNTIME, WORST CASE:  O(?) -> ? """
-        self.items.append(item)             # Inserts item at end and bubbles up to root
+        self.items.append(item)                     # Inserts item at end and bubbles up to root
         if self.size() > 1:
             self._bubble_up(self._last_index())
 
@@ -51,11 +51,11 @@ class BinaryMinHeap(object):
         if self.size() == 0:
             raise ValueError("Heap is empty and has no minimum item.")
         elif self.size() == 1:
-            return self.items.pop()         # Removes and returns only item
+            return self.items.pop()                 # Removes and returns only item
 
         assert self.size() > 1
         min_item = self.items[0]
-        last_item = self.items.pop()        # Moves last item to root and bubbles down to leaves
+        last_item = self.items.pop()                # Moves last item to root and bubbles down to leaves
         self.items[0] = last_item
 
         if self.size() > 1:
@@ -69,29 +69,30 @@ class BinaryMinHeap(object):
         TODO: RUNTIME, BEST CASE:   O(?) -> ?\t
         TODO: RUNTIME, WORST CASE:  O(?) -> ? """
         if self.size() == 0:
-            raise ValueError('Heap is empty and has no minimum item')
+            raise ValueError("Heap is empty and has no minimum item.")
+
         assert self.size() > 0
         min_item = self.items[0]
-        # Replace the root and bubble down to the leaves
-        self.items[0] = item
+        self.items[0] = item                        # Replaces root and bubbles down to leaves
+
         if self.size() > 1:
             self._bubble_down(0)
         return min_item
 
     def _bubble_up(self, index):
-        """Ensure the heap ordering property is true above the given index,
-        swapping out of order items, or until the root node is reached.
-        Best case running time: O(1) if parent item is smaller than this item.
-        Worst case running time: O(log n) if items on path up to root node are
-        out of order. Maximum path length in complete binary tree is log n."""
+        """ Ensures heap ordering property is True above given index,
+        swapping out-of-order items, or until root node is reached.\n
+        RUNTIME, BEST CASE:     O(1) -> Parent item is smaller than current item.\t
+        RUNTIME, WORST CASE:    O(log(n)) -> Items on path up to root node are
+        out-of-order. Maximum path length in complete binary tree is log(n). """
         if index == 0:
             return  # This index is the root node (does not have a parent)
         if not (0 <= index <= self._last_index()):
-            raise IndexError('Invalid index: {}'.format(index))
-        # Get the item's value
-        item = self.items[index]
-        # Get the parent's index and value
-        parent_index = self._parent_index(index)
+            raise IndexError("Invalid index: {}".format(index))
+
+        item = self.items[index]                    # Get item's value
+
+        parent_index = self._parent_index(index)    # Get parent's index and value
         parent_item = self.items[parent_index]
         # TODO: Swap this item with parent item if values are out of order
         # ...
