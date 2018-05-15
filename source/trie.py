@@ -13,14 +13,29 @@ class Trie_Node(object):
         self.children = dict()          # Saves children object as dictionary accessible under current node
 
     def add_child(self, key, data=None):
-        """ Method that adds child as node object in Trie structure. """
+        """ 
+        Method that adds child as node object in Trie structure.\n
+        PARAMS: { key }     ->  char(), str()\t
+                { data }    ->  char(), str(), NoneType() (default)\t
+        RETURN: { None }    ->  NoneType()\n
+        RUNTIME (BEST):     O(?)    ->  ???\t
+        RUNTIME (WORST):    O(?)    ->  ???\t
+        MEMORY (OPTIMAL):   O(?)    ->  ???
+        """
         if not isinstance(key, Trie_Node):
             self.children[key] = Trie_Node(key, data)
         else:
             self.children[key.label] = key
 
     def _get_item(self, key):
-        """ Helper method that grabs node's value by key index. """
+        """ 
+        Helper method that grabs node's value by key index.\n
+        PARAMS: { key }                 ->  char(), str()\t
+        RETURN: { self.children[key] }  ->  char(), str()\n
+        RUNTIME (BEST):     O(?)    ->  ???\t
+        RUNTIME (WORST):    O(?)    ->  ???\t
+        MEMORY (OPTIMAL):   O(?)    ->  ???
+        """
         return self.children[key]
 
 """ ==================================================
@@ -34,10 +49,25 @@ class Trie(object):
         self.head = Trie_Node()
 
     def _get_item(self, key):
-        """ Helper method that gets data from head of Trie structure. """
+        """ 
+        Helper method that gets data from head of Trie structure.\n
+        PARAMS: { key }                     ->  char(), str()\t
+        RETURN: { self.head.children[key] } ->  char(), str()\n
+        RUNTIME (BEST):     O(?)    ->  ???\t
+        RUNTIME (WORST):    O(?)    ->  ???\t
+        MEMORY (OPTIMAL):   O(?)    ->  ???
+        """
         return self.head.children[key]
 
     def add_word(self, word):
+        """ 
+        Method that adds word by adding/traversing letters in Trie structure.\n
+        PARAMS: { word }    ->  char(), str()\t
+        RETURN: { None }    ->  char(), str()\n
+        RUNTIME (BEST):     O(?)    ->  ???\t
+        RUNTIME (WORST):    O(?)    ->  ???\t
+        MEMORY (OPTIMAL):   O(?)    ->  ???
+        """
         """ Method that adds word by adding/traversing letters in Trie structure. """
         is_word_complete, current = True, self.head
 
@@ -74,7 +104,11 @@ class Trie(object):
                 break
 
         if does_exist:
-            
+            if current.data == None:
+                does_exist = False
+                
+        return does_exist
+
 
     def starts_with_prefix(self, prefix):
         pass
