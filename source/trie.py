@@ -57,8 +57,24 @@ class Trie(object):
         # NOTE: Stores full word as data at end of word in Trie for testing purposes
         current.data = word
 
-    def contains_word(self):
-        pass
+    def contains_word(self, word):
+        """ Method that checks if input word is contained as depth-first word in Trie structure. """
+        if len(word) < 1:
+            return False
+        if word is None:
+            raise ValueError("Trie.contains_word() requires a non-empty string.")
+
+        current, does_exist = self.head, True
+
+        for letter in word:
+            if letter in current.children:
+                current = current.children[letter]
+            else:
+                does_exist = False
+                break
+
+        if does_exist:
+            
 
     def starts_with_prefix(self, prefix):
         pass
