@@ -37,9 +37,25 @@ class Trie(object):
         """ Helper method that gets data from head of Trie structure. """
         return self.head.children[key]
 
-    def add_word(self):
+    def add_word(self, word):
         """ Method that adds word by adding/traversing letters in Trie structure. """
-        pass
+        is_word_complete, current = True, self.head
+
+        for iterator in range(len(word)):
+            if word[iterator] in current.children:
+                current = current.children[word[iterator]]
+            else:
+                is_word_complete = False
+                break
+
+        if not is_word_complete:
+            while iterator < len(word):
+                current.add_child(word[iterator])
+                current = current.children[word[iterator]]
+                iterator += 1
+        
+        # NOTE: Stores full word as data at end of word in Trie for testing purposes
+        current.data = word
 
     def contains_word(self):
         pass
