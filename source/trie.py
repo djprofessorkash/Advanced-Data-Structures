@@ -1,6 +1,7 @@
 #!python3
 
 import sys
+from time import time as t
 
 """ ==================================================
 ================== TRIE NODE CLASS ===================
@@ -180,27 +181,35 @@ class Trie(object):
         """
         autocompletions = self.starts_with_prefix(prefix.lower())
 
+        if len(autocompletions) < 1 or autocompletions == [""]:
+            return print("\nSEARCH INPUT '{}'. NO RESULTS FOUND.\n".format(prefix))
+
         # TODO: Even if word exists in Trie, print other words with existing word as prefix as alternates
         # print("\nSEARCH INPUT '{}' WAS NOT FOUND. DID YOU MEAN... ".format(prefix))
         print("\nSEARCH INPUT: '{}'. RESULTS: ".format(prefix))
         for word in autocompletions:
             print("    > {}".format(word))
-        print("\n")
+        return print("\n")
 
-def setup_trie(PATHNAME="/usr/share/dict/words"):
-    trie = Trie()
-    words = [line.strip() for line in open(PATHNAME)]
+    def _setup_trie(self, PATHNAME="/usr/share/dict/words"):
+        """ Global function to setup Trie structure using computer's in-built dictionary. """
+        words = [line.strip() for line in open(PATHNAME)]
 
-    for word in words:
-        trie.add_word(word)
-    return trie
+        for word in words:
+            trie.add_word(word)
 
 if __name__ == "__main__":
+    t0 = t()
     term = "".join(sys.argv[1:])
-    trie = setup_trie()
+
+    trie = Trie()
+    trie._setup_trie()
 
     # Autocomplete (raw)
     trie.autocomplete(term)
+    t1 = t()
+
+    print("\nTOTAL RUNTIME IS ABOUT {:.1f} SECONDS.\n".format(t1 - t0))
 
     """
     # Autocomplete (with complete word existence check)
