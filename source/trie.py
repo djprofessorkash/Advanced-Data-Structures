@@ -193,10 +193,14 @@ class Trie(object):
 
     def _setup_trie(self, PATHNAME="/usr/share/dict/words"):
         """ Global function to setup Trie structure using computer's in-built dictionary. """
+        t_st0 = t()
         words = [line.strip() for line in open(PATHNAME)]
 
         for word in words:
             trie.add_word(word)
+
+        t_st1 = t()
+        return print("\nSETUP RUNTIME IS ABOUT {:.1f} SECONDS.".format(t_st1 - t_st0))
 
 if __name__ == "__main__":
     t0 = t()
@@ -205,19 +209,16 @@ if __name__ == "__main__":
     trie = Trie()
     trie._setup_trie()
 
+    """
     # Autocomplete (raw)
     trie.autocomplete(term)
-    t1 = t()
-
-    print("\nTOTAL RUNTIME IS ABOUT {:.1f} SECONDS.\n".format(t1 - t0))
-
     """
+    
     # Autocomplete (with complete word existence check)
     if trie.contains_word(term.lower()):
         print("\nSEARCH INPUT '{}' WAS FOUND SUCCESSFULLY.\n".format(term))
     else:
         trie.autocomplete(term)
-    """
 
     """
     # Test Check: .contains_word()
@@ -228,3 +229,6 @@ if __name__ == "__main__":
     # Test Check: .starts_with_prefix()
     print("Words in Trie that start with prefix '{}': {}".format(term, trie.starts_with_prefix(term)))
     """
+
+    t1 = t()
+    print("\nTOTAL RUNTIME IS ABOUT {:.1f} SECONDS.\n".format(t1 - t0))
