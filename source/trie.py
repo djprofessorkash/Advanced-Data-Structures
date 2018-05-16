@@ -182,34 +182,40 @@ class Trie(object):
 
         # TODO: Even if word exists in Trie, print other words with existing word as prefix as alternates
         # print("\nSEARCH INPUT '{}' WAS NOT FOUND. DID YOU MEAN... ".format(prefix))
-        print("\nSEARCH INPUT: '{}'. RESULTS: ")
+        print("\nSEARCH INPUT: '{}'. RESULTS: ".format(prefix))
         for word in autocompletions:
             print("    > {}".format(word))
         print("\n")
 
-def setup(self, PATHNAME):
-    pass
-
-if __name__ == "__main__":
-    term = "".join(sys.argv[1:])
-
+def setup_trie(PATHNAME="/usr/share/dict/words"):
     trie = Trie()
-    words = [line.strip() for line in open("/usr/share/dict/words")]
+    words = [line.strip() for line in open(PATHNAME)]
 
     for word in words:
         trie.add_word(word)
+    return trie
 
-    # Autocomplete (with complete word existence check)
-    # if trie.contains_word(term.lower()):
-    #     print("\nSEARCH INPUT '{}' WAS FOUND SUCCESSFULLY.\n".format(term))
-    # else:
-    #     trie.autocomplete(term)
+if __name__ == "__main__":
+    term = "".join(sys.argv[1:])
+    trie = setup_trie()
 
     # Autocomplete (raw)
     trie.autocomplete(term)
 
-    # Test Check: .contains_word()
-    # print("'{}' in Trie: {}".format(term, trie.contains_word(term)))
+    """
+    # Autocomplete (with complete word existence check)
+    if trie.contains_word(term.lower()):
+        print("\nSEARCH INPUT '{}' WAS FOUND SUCCESSFULLY.\n".format(term))
+    else:
+        trie.autocomplete(term)
+    """
 
+    """
+    # Test Check: .contains_word()
+    print("'{}' in Trie: {}".format(term, trie.contains_word(term)))
+    """
+
+    """
     # Test Check: .starts_with_prefix()
-    # print("Words in Trie that start with prefix '{}': {}".format(term, trie.starts_with_prefix(term)))
+    print("Words in Trie that start with prefix '{}': {}".format(term, trie.starts_with_prefix(term)))
+    """
