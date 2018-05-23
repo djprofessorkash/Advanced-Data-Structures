@@ -73,6 +73,7 @@ class Trie(object):
         """
         is_word_complete, current_node = True, self.head
 
+        # Split word into letters and iteratively add word down Trie
         for iterator in range(len(word)):
             if word[iterator] in current_node.children:
                 current_node = current_node.children[word[iterator]]
@@ -80,6 +81,7 @@ class Trie(object):
                 is_word_complete = False
                 break
 
+        # While 
         if not is_word_complete:
             while iterator < len(word):
                 current_node.add_child(word[iterator])
@@ -179,6 +181,7 @@ class Trie(object):
         RUNTIME (WORST):    O(?)    ->  ???\t
         MEMORY (OPTIMAL):   O(?)    ->  ???
         """
+        t0 = t()
         autocompletions = self.starts_with_prefix(prefix.lower())
 
         if len(autocompletions) < 1 or autocompletions == [""]:
@@ -189,7 +192,9 @@ class Trie(object):
         print("\nSEARCH INPUT: '{}'. RESULTS: ".format(prefix))
         for word in autocompletions:
             print("    > {}".format(word))
-        return print("\n")
+        t1 = t()
+
+        return print("\nAUTOCOMPLETE RUNTIME IS ABOUT {:.4f} SECONDS.".format(t1 - t0))
 
     def _setup_trie(self, PATHNAME="/usr/share/dict/words"):
         """ Global function to setup Trie structure using computer's in-built dictionary. """
@@ -197,13 +202,12 @@ class Trie(object):
         words = [line.strip() for line in open(PATHNAME)]
 
         for word in words:
-            trie.add_word(word)
+            self.add_word(word)
 
         t_st1 = t()
-        return print("\nSETUP RUNTIME IS ABOUT {:.1f} SECONDS.".format(t_st1 - t_st0))
+        return print("\nSETUP RUNTIME IS ABOUT {:.4f} SECONDS.".format(t_st1 - t_st0))
 
 if __name__ == "__main__":
-    t0 = t()
     term = "".join(sys.argv[1:])
 
     trie = Trie()
@@ -229,6 +233,3 @@ if __name__ == "__main__":
     # Test Check: .starts_with_prefix()
     print("Words in Trie that start with prefix '{}': {}".format(term, trie.starts_with_prefix(term)))
     """
-
-    t1 = t()
-    print("\nTOTAL RUNTIME IS ABOUT {:.1f} SECONDS.\n".format(t1 - t0))
