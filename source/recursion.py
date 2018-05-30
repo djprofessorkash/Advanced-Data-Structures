@@ -12,8 +12,8 @@ def fibonacci(n):
     # Implement fibonacci_recursive, _memoized, and _dynamic below, then
     # change this to call your implementation to verify it passes all tests
     # return fibonacci_recursive(n)
-    return fibonacci_memoized(n)
-    # return fibonacci_dynamic(n)
+    # return fibonacci_memoized(n)
+    return fibonacci_dynamic(n)
 
 
 def fibonacci_recursive(n):
@@ -39,9 +39,14 @@ def fibonacci_memoized(n, cache={0:1, 1:1}):
 
 def fibonacci_dynamic(n):
     # TODO: Implement the fibonacci function with dynamic programming here
-    pass
     # Once implemented, change fibonacci (above) to call fibonacci_dynamic
     # to verify that your dynamic implementation passes all test cases
+    dyn_store = [0] * (n + 1)
+    dyn_store[0], dyn_store[1] = 0, 1
+
+    for iterator in range(2, n + 1):
+        dyn_store[iterator] = dyn_store[iterator - 1] + dyn_store[iterator - 2]
+    return dyn_store[n]
 
 
 def main():
